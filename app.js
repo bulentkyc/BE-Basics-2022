@@ -18,6 +18,8 @@ const express = require('express');
 const app = express();
 const path = require('path');
 
+const public = require('./controller/public');
+
 //app.use('/static', express.static(path.join(__dirname, 'public')));
 //app.use(express.static('public'));
 
@@ -51,37 +53,18 @@ const iphones = [
     }
 ];
 
-app.get('/', (req, res) => 
-    res
-        .status(202)
-        .setHeader('Content-Type', 'text/plain')
-        .send('Life is easier with Express :)')
-);
+//TODO: Hadle requests with "/" via controller/public.js
+
+app.get('/', public.main);
+
+//about
+app.get('/about', public.about)
 
 app.get('/iphone', (req, res) => 
     res
         .status(200)
         .setHeader('Content-Type', 'application/json')
         .json(iphones)
-);
-
-app.get('/about', (req, res) => 
-    res
-        .status(200)
-        .setHeader('Content-Type', 'text/html')
-        .send(`
-        <html>
-            <head>
-            </head>
-            <script>
-                alert('Welcome on our shop');
-            </script>
-            <body>
-                <h1>Hello World!</h1>
-                <img src = "https://images.unsplash.com/photo-1560209617-059c0bd661ba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80">
-            </body>
-        </html>
-        `)
 );
 
 app.get('/contact', (req, res) => 
