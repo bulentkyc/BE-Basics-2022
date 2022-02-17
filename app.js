@@ -17,7 +17,8 @@ myFirstServer
 const express = require('express');
 const app = express();
 
-const router = require('./router/router');
+const publicRouter = require('./router/publicRouter');
+const apiRouter = require('./router/apiRouter');
 
 //app.use('/static', express.static(path.join(__dirname, 'public')));
 //app.use(express.static('public'));
@@ -31,6 +32,8 @@ let allowCrossDomain = function(req, res, next) {
 
 app.use(allowCrossDomain);
 
-app.use('/', router);
+app.use('/', publicRouter);
+app.use('/api', apiRouter);
+
 
 app.listen(8080, ()=> console.log('Server started to run at the port 8080'));
