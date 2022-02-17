@@ -16,9 +16,8 @@ myFirstServer
 
 const express = require('express');
 const app = express();
-const path = require('path');
 
-const public = require('./controller/public');
+const router = require('./router/router');
 
 //app.use('/static', express.static(path.join(__dirname, 'public')));
 //app.use(express.static('public'));
@@ -32,21 +31,6 @@ let allowCrossDomain = function(req, res, next) {
 
 app.use(allowCrossDomain);
 
+app.use('/', router);
 
-//TODO: Hadle requests with "/" via controller/public.js
-
-app.get('/', public.main);
-
-//about
-app.get('/about', public.about);
-
-app.get('/iphone', public.getIphones);
-
-app.get('/contact', (req, res) => 
-    res
-        .status(200)
-        .setHeader('Content-Type', 'text/html')
-        .sendFile(path.join(__dirname, 'public/contact.html'))
-);
-
-app.listen(8080, ()=> console.log('Server started to run at the port 8088'));
+app.listen(8080, ()=> console.log('Server started to run at the port 8080'));

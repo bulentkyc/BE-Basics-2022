@@ -1,4 +1,5 @@
 //Handle all public request here
+const path = require('path');
 
 const iphones = [
     {
@@ -52,3 +53,9 @@ exports.getIphones = (req, res) =>
         .status(200)
         .setHeader('Content-Type', 'application/json')
         .json(iphones)
+
+exports.contact = (req, res) => 
+    res
+        .status(200)
+        .setHeader('Content-Type', 'text/html')
+        .sendFile(path.join(__dirname, '../public/contact.html'))
