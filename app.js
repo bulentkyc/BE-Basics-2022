@@ -58,14 +58,9 @@ const iphones = [
 app.get('/', public.main);
 
 //about
-app.get('/about', public.about)
+app.get('/about', public.about);
 
-app.get('/iphone', (req, res) => 
-    res
-        .status(200)
-        .setHeader('Content-Type', 'application/json')
-        .json(iphones)
-);
+app.get('/iphone', public.getIphones);
 
 app.get('/contact', (req, res) => 
     res
@@ -75,9 +70,3 @@ app.get('/contact', (req, res) =>
 );
 
 app.listen(8080, ()=> console.log('Server started to run at the port 8088'));
-
-
-
-
-
-
