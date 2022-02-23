@@ -26,17 +26,17 @@ exports.getIphones = (req, res) =>
         .json(iphones)
 
 exports.home = (req, res) =>
-res
-    .status(200)
-    .setHeader('Content-Type', 'text/html')
-    .send(`
-    <html>
-        <head>
-        </head>
-        <body>
-            <h1>Welcome on Apis of E06-2!</h1>
-            <img src = "https://images.unsplash.com/photo-1623282033815-40b05d96c903?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YXBpfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60">
-        </body>
-    </html>
-    `
-    );
+    res
+        .status(200)
+        .setHeader('Content-Type', 'text/html')
+        .send(`
+        <html>
+            <head>
+            </head>
+            <body>
+                <h1>Welcome on Apis of E06-2!</h1>
+                <img src = "https://images.unsplash.com/photo-1623282033815-40b05d96c903?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YXBpfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60">
+            </body>
+        </html>
+        `
+        );

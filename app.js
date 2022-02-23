@@ -19,6 +19,17 @@ const app = express();
 
 const publicRouter = require('./router/publicRouter');
 const apiRouter = require('./router/apiRouter');
+const authRouter = require('./router/authRouter');
+
+const port = process.env.PORT || 8080;
+
+app.use(express.json());
+
+console.log(process.argv);
+
+/*process.exit();
+The code above shuts the server down!!!
+*/
 
 //app.use('/static', express.static(path.join(__dirname, 'public')));
 //app.use(express.static('public'));
@@ -34,6 +45,7 @@ app.use(allowCrossDomain);
 
 app.use('/', publicRouter);
 app.use('/api', apiRouter);
+app.use('/auth', authRouter);
 
 
-app.listen(8080, ()=> console.log('Server started to run at the port 8080'));
+app.listen(port, ()=> console.log(`Server started to run at the port ${port}`));
