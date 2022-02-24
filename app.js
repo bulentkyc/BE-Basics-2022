@@ -22,9 +22,11 @@ const apiRouter = require('./router/apiRouter');
 const authRouter = require('./router/authRouter');
 const db = require('./config/db');
 
+db();
+
 const port = process.env.PORT || 8080;
 
-db();
+
 
 app.use(express.json());
 

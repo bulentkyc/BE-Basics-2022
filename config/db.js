@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const dbURI = 'mongodb+srv://beAdmin:SH7SG7NKpN9pSA11@attendancetracker.ha9nd.mongodb.net/ecommerce?retryWrites=true&w=majority'
+const dbURI = 'mongodb+srv://beAdmin:piri9uOT5zLcwHV4@attendancetracker.ha9nd.mongodb.net/ecommerce?retryWrites=true&w=majority'
 
 const connectDB = async () => {
     try {

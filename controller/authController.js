@@ -1,4 +1,6 @@
-const users = [
+const usersModel = require('../model/usersModel');
+
+/* const users = [
     {
         email: 'test@test.com',
         pass: '123abc'
@@ -7,13 +9,14 @@ const users = [
         email: 'bulent@kyc.com',
         pass: '123'
     },
-];
+]; */
+
 
 exports.login = (req, res) => {
     //console.log(req.body);
     const {email, pass} = req.body;
     //console.log(email, pass);
-   /*  const activeUser = users.find((user) => user.email === email )
+    /* const activeUser = users.find((user) => user.email === email )
     console.log('found user :',activeUser);
     if (activeUser == undefined) {
         res.send('The user is not registered!');
@@ -25,21 +28,65 @@ exports.login = (req, res) => {
         }  
     } */
 
-    const activeUser = users.find((user) => user.email === email && user.pass == pass )
+    /* const activeUser = users.find((user) => user.email === email && user.pass == pass )
     if (activeUser == undefined) {
         res.send('Wrong cridentials');
     } else {
         res.send(`Logged in successfully with ${email}`);
-    }
+    } */
 
-
+    //console.log({email});
+    usersModel.findOne({email, pass}, (err, doc) => {
+        if (err) {
+            console.log(err);
+            res.send(`Oooops! There's an error please contact with support!`)
+        } else {
+            console.log(doc);
+            if (doc) {
+                res.send(`Logged in successfully with ${email}`);
+            } else {
+                res.send('Wrong cridentials');
+            }
+        }
+    });
 }
-exports.register = (req, res) => {
+
+exports.register = async (req, res) => {
     //const {email, pass} = req.body;
     //console.log(email,pass);
-    users.push(req.body)
+
+    /* users.push(req.body)
     console.log(users);
     res.send(`${req.body.email} is registered!`);
+    */
+
+    //let isRegistered = false;
+    //TODO: Find email on users collection!
+
+    let userCheck = await usersModel.findOne({email:req.body.email})
+    
+
+  
+
+    if (userCheck) {
+        res.send('The user has registered already!');
+    } else {
+        const newUser = usersModel(req.body);
+
+        newUser.save((err, doc)=>{
+            if (err) {
+                console.log(err);
+                res.send(`Oooops! There's an error please contact with support!`)
+            } else {
+                console.log(doc);
+                res.send(`${doc.email} is registered successfully!`)
+            }
+
+        });
+
+    }   
+
 }
+
 exports.test = (req, res) => 
     res.send('Test is OK!');
