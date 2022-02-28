@@ -1,6 +1,6 @@
 const iphones = [
     {
-        model: 'X',
+        model: 'XXXXXX',
         color: 'White',
         price: '700$',
         imgURL: 'https://images.unsplash.com/photo-1523206489230-c012c64b2b48?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80'
@@ -19,11 +19,18 @@ const iphones = [
     }
 ];
 
-exports.getIphones = (req, res) => 
-    res
-        .status(200)
-        .setHeader('Content-Type', 'application/json')
-        .json(iphones)
+exports.getIphones = (req, res) => {
+    const token = req.header('test');
+    console.log(token);
+    if (token == '12345abc') {
+        res
+            .status(200)
+            .setHeader('Content-Type', 'application/json')
+            .json(iphones)
+    } else {
+        res.send('Unauthorised request!')
+    }
+}
 
 exports.home = (req, res) =>
     res
