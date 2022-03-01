@@ -2,7 +2,7 @@ const usersModel = require('../model/usersModel');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const jwt = require('jsonwebtoken');
-const secretKey = '13ef5s46s!@$!@2d4f6v8ds23dfdSDGSD';
+const secretKey = process.env.JWT_SECRET_KEY;
 
 /* const users = [
     {
@@ -29,7 +29,7 @@ exports.login = (req, res) => {
             if (doc) {
                 if(bcrypt.compareSync(pass, doc.pass)) {
                     //Correct password
-                    const token = jwt.sign({msg: 'Hello World!', foo: 'moo'}, secretKey);
+                    const token = jwt.sign({msg: 'Hello World!', foo: 'moo', email: doc.email}, secretKey);
                     console.log(token);
                     res.send(token);
                 }else {

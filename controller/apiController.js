@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
-const secretKey = '13ef5s46s!@$!@2d4f6v8ds23dfdSDGSD';
+const secretKey = process.env.JWT_SECRET_KEY;
+
 
 const iphones = [
     {
@@ -29,8 +30,16 @@ exports.getIphones = (req, res) => {
     jwt.verify(token, secretKey, function(err, decoded) {
         if (err) {
             console.log(err);
+            res
+                .status(401)
+                .setHeader('Content-Type', 'text/plain')
+                .send('Authorisation is failed.');
         } else {
             console.log(decoded);
+            res
+                .status(200)
+                .setHeader('Content-Type', 'application/json')
+                .json(iphones)
         }
     });
 

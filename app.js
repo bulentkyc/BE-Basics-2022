@@ -16,6 +16,10 @@ myFirstServer
 
 const express = require('express');
 const app = express();
+//process.env.JWT_SECRET_KEY = '13ef5s46s!@$!@2d4f6v8ds23dfdSDGSD';
+
+require('dotenv').config()
+console.log(process.env)
 
 const publicRouter = require('./router/publicRouter');
 const apiRouter = require('./router/apiRouter');
@@ -27,6 +31,7 @@ db();
 const port = process.env.PORT || 8080;
 
 
+//console.log('secretKey:' , process.env.JWT_SECRET_KEY);
 
 app.use(express.json());
 
