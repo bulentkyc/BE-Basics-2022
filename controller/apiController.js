@@ -1,3 +1,6 @@
+const jwt = require('jsonwebtoken');
+const secretKey = '13ef5s46s!@$!@2d4f6v8ds23dfdSDGSD';
+
 const iphones = [
     {
         model: 'XXXXXX',
@@ -20,16 +23,26 @@ const iphones = [
 ];
 
 exports.getIphones = (req, res) => {
-    const token = req.header('test');
+    const token = req.header('x-auth-token');
     console.log(token);
-    if (token == '12345abc') {
+
+    jwt.verify(token, secretKey, function(err, decoded) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(decoded);
+        }
+    });
+
+
+   /*  if (token == '12345abc') {
         res
             .status(200)
             .setHeader('Content-Type', 'application/json')
             .json(iphones)
     } else {
         res.send('Unauthorised request!')
-    }
+    } */
 }
 
 exports.home = (req, res) =>

@@ -1,6 +1,8 @@
 const usersModel = require('../model/usersModel');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+const jwt = require('jsonwebtoken');
+const secretKey = '13ef5s46s!@$!@2d4f6v8ds23dfdSDGSD';
 
 /* const users = [
     {
@@ -25,9 +27,13 @@ exports.login = (req, res) => {
         } else {
             console.log(doc);
             if (doc) {
-                if(bcrypt.compareSync(pass, doc.pass)){
-                    res.send(`12345abc`);
+                if(bcrypt.compareSync(pass, doc.pass)) {
+                    //Correct password
+                    const token = jwt.sign({msg: 'Hello World!', foo: 'moo'}, secretKey);
+                    console.log(token);
+                    res.send(token);
                 }else {
+                    //Wrong password
                     res.send('Wrong cridentials');
                 }
             } else {
@@ -102,8 +108,6 @@ exports.register = async (req, res) => {
                 });
             }
         });
-
-        
 
     }   
 
