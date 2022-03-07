@@ -18,13 +18,14 @@ const express = require('express');
 const app = express();
 //process.env.JWT_SECRET_KEY = '13ef5s46s!@$!@2d4f6v8ds23dfdSDGSD';
 
-require('dotenv').config()
+require('dotenv').config();
 console.log(process.env)
 
 const publicRouter = require('./router/publicRouter');
 const apiRouter = require('./router/apiRouter');
 const authRouter = require('./router/authRouter');
-const db = require('./config/db');
+const db = require('./config/db')
+const test = require('./middleware/test');
 
 db();
 
@@ -53,9 +54,16 @@ let allowCrossDomain = function(req, res, next) {
 
 app.use(allowCrossDomain);
 
-app.use('/', publicRouter);
-app.use('/api', apiRouter);
-app.use('/auth', authRouter);
+/* const test = (req, res, next) => {
+    console.log('Hey, you have a new request!');
+    next();
+} */
+
+//app.use(test);
+
+app.use('/', publicRouter);//no log
+app.use('/api', test.log, test.check, apiRouter); //log on the console
+app.use('/auth', authRouter); //no log
 
 
 app.listen(port, ()=> console.log(`Server started to run at the port ${port}`));

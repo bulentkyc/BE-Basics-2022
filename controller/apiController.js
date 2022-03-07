@@ -1,7 +1,3 @@
-const jwt = require('jsonwebtoken');
-const secretKey = process.env.JWT_SECRET_KEY;
-
-
 const iphones = [
     {
         model: 'XXXXXX',
@@ -24,25 +20,10 @@ const iphones = [
 ];
 
 exports.getIphones = (req, res) => {
-    const token = req.header('x-auth-token');
-    console.log(token);
-
-    jwt.verify(token, secretKey, function(err, decoded) {
-        if (err) {
-            console.log(err);
-            res
-                .status(401)
-                .setHeader('Content-Type', 'text/plain')
-                .send('Authorisation is failed.');
-        } else {
-            console.log(decoded);
-            res
+    res
                 .status(200)
                 .setHeader('Content-Type', 'application/json')
                 .json(iphones)
-        }
-    });
-
 
    /*  if (token == '12345abc') {
         res
