@@ -3,7 +3,7 @@ const secretKey = process.env.JWT_SECRET_KEY;
 
 exports.validate = (req, res, next) => {
     const token = req.header('x-auth-token');
-    console.log(token);
+    //console.log(token);
 
     jwt.verify(token, secretKey, function(err, decoded) {
         if (err) {

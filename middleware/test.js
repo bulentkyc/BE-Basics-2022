@@ -5,7 +5,7 @@ exports.log = (req, res, next) => {
 
 exports.check = (req, res, next) => {
     token = req.header('x-auth-token');
-    console.log(token);
+    //console.log(token);
     if (token != 'null') {
         console.log('Token is here');
         //res.send('I got your token');
