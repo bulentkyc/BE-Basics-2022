@@ -26,6 +26,7 @@ const apiRouter = require('./router/apiRouter');
 const authRouter = require('./router/authRouter');
 const db = require('./config/db')
 const test = require('./middleware/test');
+const profileRouter = require('./router/profileRouter');
 
 db();
 
@@ -64,6 +65,6 @@ app.use(allowCrossDomain);
 app.use('/', publicRouter);//no log
 app.use('/api', test.log, test.check, apiRouter); //log on the console
 app.use('/auth', authRouter); //no log
-
+app.use('/profile', profileRouter);
 
 app.listen(port, ()=> console.log(`Server started to run at the port ${port}`));
