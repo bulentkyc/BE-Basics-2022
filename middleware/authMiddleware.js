@@ -14,6 +14,7 @@ exports.validate = (req, res, next) => {
                 .send('Authorisation is failed.');
         } else {
             console.log(decoded);
+            req.payload = decoded;
             next();
         }
     });

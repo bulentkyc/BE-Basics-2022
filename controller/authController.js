@@ -29,7 +29,7 @@ exports.login = (req, res) => {
             if (doc) {
                 if(bcrypt.compareSync(pass, doc.pass)) {
                     //Correct password
-                    const token = jwt.sign({msg: 'Hello World!', foo: 'moo', email: doc.email}, secretKey);
+                    const token = jwt.sign({msg: 'Hello World!', foo: 'moo', email: doc.email, userId: doc._id}, secretKey);
                     console.log(token);
                     res.send(token);
                 }else {
