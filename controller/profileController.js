@@ -9,7 +9,7 @@ exports.save = async (req, res) => {
     console.log(profile);
 
     if (profile) {
-        res.send(`Your profile saved successfully!`)
+        res.send(`Your profile saved successfully!`);
     } else {
         res.send(`There's an error please try again!`);
     } 

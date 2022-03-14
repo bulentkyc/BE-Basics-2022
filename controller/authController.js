@@ -21,23 +21,33 @@ exports.login = (req, res) => {
     const {email, pass} = req.body;
 
     usersModel.findOne({email}, (err, doc) => {
+        const response = {};
         if (err) {
             console.log(err);
-            res.send(`Oooops! There's an error please contact with support!`)
+            response.status = 'fail';
+            response.msg = `Oooops! There's an error please contact with support!`;
+            res.status(503).send(response);
         } else {
             console.log(doc);
             if (doc) {
                 if(bcrypt.compareSync(pass, doc.pass)) {
                     //Correct password
                     const token = jwt.sign({msg: 'Hello World!', foo: 'moo', email: doc.email, userId: doc._id}, secretKey);
-                    console.log(token);
-                    res.send(token);
+                    console.log(token);                        
+                    response.status = 'success';
+                    response.msg = `Authentication is success!`;
+                    response.token = token;
+                    res.status(200).send(response);
                 }else {
                     //Wrong password
-                    res.send('Wrong cridentials');
+                    response.status = 'fail';
+                    response.msg = `Wrong cridentials`;
+                    res.status(401).send(response);
                 }
             } else {
-                res.send('User is not registered');
+                response.status = 'fail';
+                response.msg = `User is not registered`;
+                res.status(401).send(response);
             }
         }
     }); 
