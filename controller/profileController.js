@@ -1,10 +1,10 @@
-const profilesModel = require('../model/profileModel')
+const profileModel = require('../model/profileModel')
 
 exports.save = async (req, res) => {
     console.log(req.body);
     const userId = req.payload.userId;
 
-    const profile = await profilesModel.findOneAndUpdate({userId}, {userId, ...req.body}, {new: true, upsert: true});
+    const profile = await profileModel.findOneAndUpdate({userId}, {userId, ...req.body}, {new: true, upsert: true});
 
     console.log(profile);
 
@@ -14,7 +14,7 @@ exports.save = async (req, res) => {
         res.send(`There's an error please try again!`);
     } 
 
-    /* const newProfile = new profilesModel({userId, ...req.body});
+    /* const newProfile = new profileModel({userId, ...req.body});
 
     newProfile.save((err, doc) => {
         if (err) {
@@ -26,5 +26,22 @@ exports.save = async (req, res) => {
         }
     }); */
     //res.send('Submittion is success!');
+}
+
+exports.getProfile = async (req, res) => {
+    const userId = req.payload.userId;
+    const profile = await profileModel.findOne({userId});
+    if (profile) {
+        res.status(200).json({
+        status: 'success',
+        msg: 'The profile data is ready!',
+        data: profile
+    });
+    } else {
+        res.status(401).json({
+            status: 'fail',
+            msg: 'User is not found!'
+        });
+    }
 }
 
