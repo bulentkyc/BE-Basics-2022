@@ -27,6 +27,7 @@ const authRouter = require('./router/authRouter');
 const db = require('./config/db')
 const test = require('./middleware/test');
 const profileRouter = require('./router/profileRouter');
+const cartRouter = require('./router/cartRouter');
 
 db();
 
@@ -66,5 +67,6 @@ app.use('/', publicRouter);//no log
 app.use('/api', test.log, test.check, apiRouter); //log on the console
 app.use('/auth', authRouter); //no log
 app.use('/profile', profileRouter);
+app.use('/cart', cartRouter);
 
 app.listen(port, ()=> console.log(`Server started to run at the port ${port}`));
