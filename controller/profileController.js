@@ -1,7 +1,7 @@
 const profileModel = require('../model/profileModel')
 
 exports.save = async (req, res) => {
-    console.log(req.body);
+    console.log('body', req.body);
     const userId = req.payload.userId;
 
     const profile = await profileModel.findOneAndUpdate({userId}, {userId, ...req.body}, {new: true, upsert: true});

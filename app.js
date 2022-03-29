@@ -33,6 +33,7 @@ db();
 
 const port = process.env.PORT || 8080;
 
+app.use(express.static('public'));
 
 //console.log('secretKey:' , process.env.JWT_SECRET_KEY);
 
