@@ -9,7 +9,8 @@ const profiles = new mongoose.Schema({
     birthDate: Number,
     street: String,
     city: String,
-    postCode: String
+    postCode: String,
+    avatarName: String
 });
 
 module.exports = mongoose.model('profiles', profiles);
