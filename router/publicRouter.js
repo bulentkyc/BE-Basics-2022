@@ -9,5 +9,7 @@ router.get('/about', public.about);
 
 router.get('/contact', public.contact);
 
+router.post('/contactus', public.contactus);
+
 
 module.exports = router;
